@@ -1,3 +1,4 @@
 cnn_ver1.zip filter=lfs diff=lfs merge=lfs -text
 train_ver1.zip filter=lfs diff=lfs merge=lfs -text
 cnn_ver2.zip filter=lfs diff=lfs merge=lfs -text
+seborrheic_keratosis filter=lfs diff=lfs merge=lfs -text
