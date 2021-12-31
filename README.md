@@ -32,9 +32,27 @@
 - Flask
 
 ### 데이터   
-[데이터 수집 링크]()
+[데이터 수집 링크]()    
+<table border=0 >
+   <tbody>
+       <tr>
+			<td align="center"> 1. Melanoma (000) </td>
+			<td align="center"> 2. Nevus (000) </td>
+			<td align="center"> 3. Seborrheic_keratosis    (000)</td>
+		</tr>
+      <tr>
+			<td width="32%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg">
+          <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
+         <td width="16%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
+         <td width="16%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
+			<td width="16%"> <img src="https://user-images.githubusercontent.com/53503626/147816828-ffc1d008-0837-4368-bbcc-ccf0f8403503.jpg"> </td>
+			<td width="16%"> <img src="https://user-images.githubusercontent.com/53503626/147816824-e5da93ab-5c37-4b7f-aaed-c4ce267e75cd.jpg"> </td>
+      </tr>
 
-
+   </tbody>
+ </table>
+ 
+ 
 ### 학습
    
 **학습코드**
