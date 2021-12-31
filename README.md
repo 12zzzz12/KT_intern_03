@@ -3,7 +3,8 @@
 # 흑색종 진단 서비스
 
 ## 소개
-**흑색종 진단 서비스**는 흑색종(Melanoma)[**흑색종사이트링크**], 점(Nevus), 검버섯(Seborrheic_keratosis)[**검버섯사이트링크**] 3가지 중 한가지로 판별해준다. 안드로이드 앱에서 흑색종으로 의심되는 피부를 촬영 후, AI 모델을 서빙하는 Flask 서버로 전송한다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 0.5 이상의 정확도를 가지는 카테고리로 분류한다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 지닌다. 
+**흑색종 진단 서비스**는 흑색종(Melanoma)[**흑색종사이트링크**], 점(Nevus), 검버섯(Seborrheic_keratosis)[**검버섯사이트링크**] 3가지 중 한가지로 판별하는 기능을 가집니다.   
+사용자가 안드로이드 앱을 이용해 흑색종으로 의심되는 피부를 촬영하면, 해당 이미지를 AI 모델이 있는 Flask 서버로 전송합니다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 0.5 이상의 정확도를 가지는 카테고리로 분류됩니다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 거칩니다. 
 
 **개발기간** : __Jan 01, 2021__ : 흑색종 진단 서비스 
 
@@ -39,15 +40,13 @@
 			<td align="center"> 1. Melanoma (000) </td>
 			<td align="center"> 2. Nevus (000) </td>
 			<td align="center"> 3. Seborrheic_keratosis    (000)</td>
-		</tr>
+	</tr>
       <tr>
-			<td width="32%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg">
-          <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
-         <td width="16%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
-         <td width="16%" > <img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"> </td>
-			<td width="16%"> <img src="https://user-images.githubusercontent.com/53503626/147816828-ffc1d008-0837-4368-bbcc-ccf0f8403503.jpg"> </td>
-			<td width="16%"> <img src="https://user-images.githubusercontent.com/53503626/147816824-e5da93ab-5c37-4b7f-aaed-c4ce267e75cd.jpg"> </td>
-      </tr>
+<td width="33%" >
+<img src="https://user-images.githubusercontent.com/53503626/147816220-0e1a4294-ee2b-46c5-aa2c-9f5c5077c16b.jpg"></td>      
+<td width="33%" > <img src="https://user-images.githubusercontent.com/53503626/147816828-ffc1d008-0837-4368-bbcc-ccf0f8403503.jpg"></td>
+<td width="33%" > <img src="https://user-images.githubusercontent.com/53503626/147816824-e5da93ab-5c37-4b7f-aaed-c4ce267e75cd.jpg"> </td>
+			
 
    </tbody>
  </table>
@@ -94,21 +93,8 @@ model.py를 실행시키면 테스트 이미지를 분류한 카테고리와 정
 
 ## 4. 결과 
 
-## 5. 참고자료 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 5. Reference 
+* 임상헌, and 이명숙. "딥 러닝 기반의 악성흑색종 분류를 위한 컴퓨터 보조진단 알고리즘." 사) 디지털산업정보학회 논문지 14.4 (2018): 69-77.
 
 
 
@@ -116,7 +102,7 @@ model.py를 실행시키면 테스트 이미지를 분류한 카테고리와 정
 
 "참고사이트"
 
-ink : https://github.com/cavitcakir/Skin-Cancer-Classification
+link : https://github.com/cavitcakir/Skin-Cancer-Classification
 
 
 
