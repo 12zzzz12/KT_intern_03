@@ -4,9 +4,9 @@
 
 ## 소개
 **흑색종 진단 서비스**는 흑색종(Melanoma)[**흑색종사이트링크**], 점(Nevus), 검버섯(Seborrheic_keratosis)[**검버섯사이트링크**] 3가지 중 한가지로 판별하는 기능을 가집니다.   
-사용자가 안드로이드 앱을 이용해 흑색종으로 의심되는 피부를 촬영하면, 해당 이미지를 AI 모델이 있는 Flask 서버로 전송합니다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 0.5 이상의 정확도를 가지는 카테고리로 분류됩니다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 거칩니다. 
+사용자가 안드로이드 앱을 이용해 흑색종으로 의심되는 피부를 촬영하면, 해당 이미지를 AI 모델이 있는 Flask 서버로 전송합니다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 0.5 이상의 정확도를 가지는 카테고리로 분류합니다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 거칩니다. 
 
-**업데이트** : __Jan 01, 2021__ : AndroidImg 
+**최종업데이트** : __Jan 01, 2021__ : AndroidImg 
 
 **참여자** : [김륜아](https://github.com/lena-for-world), [김재근](https://github.com/12zzzz12), [김초원](https://github.com/cwaa079), [문지영](https://github.com/94MOONJI), [박인정](https://github.com/injjeong), [안시현](https://github.com/ashnnn98), [우수연](https://github.com/WSY0000), [이채흔](https://github.com/chaeheun), [장지호](https://github.com/twa04047), [천웅빈](https://github.com/woong223)
 
@@ -31,7 +31,7 @@
 
 * Map 
 
-모델이 흑색종이라고 판단된 경우, 근처의 병원 위치를 지도로 표시합니다.   
+이미지가 흑색종이라고 판단된 경우, 근처의 병원 위치를 지도로 표시합니다.   
 [**구글 맵 뛰우는 화면 녹화 or 화면 이미지**]   
 
 
@@ -40,12 +40,12 @@
 ## 2. AI 모델   
 
 ### 개발환경
-- Python3
-- TensorFlow 2.x
-- Keras
-- Flask
+- [Python3](https://www.python.org/downloads/)
+- [TensorFlow 2.x](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ko)
+- [Keras](https://keras.io/ko/)
+- [Flask](https://flask-docs-kr.readthedocs.io/ko/latest/)
 
-### 데이터   
+### 데이터 수집   
 [데이터 수집 링크]()    
 <table border=0 >
    <tbody>
@@ -65,6 +65,12 @@
  </table>
  
  
+### 데이터전처리   
+[간단한설명]   
+```
+ex) resize.(224,224) ?? 
+```
+
 ### 학습
    
 **학습코드**   
@@ -118,10 +124,9 @@ model.py에서 이미지 경로를 설정하고 동작하면, 테스트 이미�
 ```
 result, pred = pred_return("./image/melanoma.jpg") #ImgPath 설정
 print(result, ':', pred , "%")
-```
-[model_test.py 에서 이미지경로를 설정하고 출력하는 코드]   
+```    
 
-코드를 실행해 AI모델이 흑색종(Melanoma) 이미지를 분류한 것을 확인할 수 있습니다.   
+코드를 실행하면 AI모델이 흑색종(Melanoma) 이미지를 분류한 것을 확인할 수 있습니다.   
 <img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>
 [흑색종(Melanoma) 이미지 분류결과]   
 
