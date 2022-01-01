@@ -69,7 +69,7 @@
  
 ### 데이터전처리   
 [간단한설명]   
-```
+```Python
 ex) resize.(224,224) ?? 
 ```
 
@@ -77,19 +77,19 @@ ex) resize.(224,224) ??
    
 **학습코드**   
 [간단한 설명]
-```   
+```Python   
 ex) train.py 
    
 ```
 **파라미터?**   
 [간단한 설명]
-```
+```Python
 ex) train(parameter)
 ```
    
 ### 정확도 측정   
 [간단한 설명]
-```
+```Python
 ex ) model.predict()
 ```
 
@@ -123,7 +123,7 @@ git clone https://github.com/12zzzz12/KT_intern_03_prototype.git
    
 ### 모델 실행
 model_test.py에서 이미지 경로를 설정하고 동작하면, 테스트 이미지를 분류한 카테고리와 정확도를 출력합니다.
-```
+```Python
 result, pred = pred_return("./image/melanoma.jpg") #ImgPath 설정
 print(result, ':', pred , "%")
 ```    
