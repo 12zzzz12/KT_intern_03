@@ -17,7 +17,8 @@
 3. [AI 모델 실행 방법](#AI-모델-실행-방법)
 4. [결과](#결과)
 5. [참고자료](#참고자료)
-
+   
+---
 ## 1. 안드로이드   
 본 서비스를 제공하기 위해서 안드로이드는 이미지 촬영, 병원 추천, AI 모델 통신 기능을 수행합니다.
 
@@ -36,8 +37,9 @@
 
 
 
-
+---
 ## 2. AI 모델   
+
 
 ### 개발환경
 - [Python3](https://www.python.org/downloads/)
@@ -104,7 +106,7 @@ model.py는 안드로이드로부터 제공받은 이미지를 AI 모델에 적�
 server.py는 model.py에서 얻은 결과값(String)을 안드로이드로 전송합니다.   
 [**Flask 서버 동작 콘솔 이미지**]
 
-
+---
 ## 3. AI 모델 실행 방법 
 ### 모델 설치   
       
@@ -130,6 +132,7 @@ print(result, ':', pred , "%")
 <img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>
 [흑색종(Melanoma) 이미지 분류결과]   
 
+---
 ## 4. 결과 
 
 ### 정확도(그래프, 혼동행렬, 등등?)    
@@ -137,7 +140,7 @@ print(result, ':', pred , "%")
 
 ### 기타논문과 비교   
 
-
+---
 ## 5. Reference 
 * 임상헌, and 이명숙. "딥 러닝 기반의 악성흑색종 분류를 위한 컴퓨터 보조진단 알고리즘." 사) 디지털산업정보학회 논문지 14.4 (2018): 69-77.
 * https://github.com/cavitcakir/Skin-Cancer-Classification
