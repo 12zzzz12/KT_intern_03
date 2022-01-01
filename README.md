@@ -89,6 +89,7 @@ ex ) model.predict()
 ### Flask
 Flask를 이용해 안드로이드와 통신합니다.   
 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
+
 [**Flask 디렉토리 구조 이미지**]
 
 model.py는 안드로이드로부터 제공받은 이미지를 AI 모델에 적용하고 분류된 클래스와 정확도를 리턴합니다.      
