@@ -105,20 +105,21 @@ server.py는 model.py에서 얻은 결과값(String)을 안드로이드로 전�
 본 프로젝트에서 사용한 모델을 실행할 수 있도록 준비된 [사이트](https://github.com/12zzzz12/KT_intern_03_prototype)에서 파일을 clone 합니다.
 ```
 git clone https://github.com/12zzzz12/KT_intern_03_prototype.git
-```
-설치한 파일을 PyCharm에서 실행시킵니다.     
-   
-[***파이참 설치된 파일구조 사진***]   
+```   
 
-PyCharm에 세팅한 파일구조
-   
-      
+설치한 파일을 PyCharm에서 실행시킵니다.     
+![파이참구조](https://user-images.githubusercontent.com/53503626/147846980-168754cc-4fc9-41ec-a85e-fa4f5a191068.PNG)
+[디렉토리 이미지]   
+    
         
    
 #### 모델 실행
 [***모델 동작 사진 및 결과 사진***]   
-model.py를 실행시키면 테스트 이미지를 분류한 카테고리와 정확도를 출력합니다.
-
+model.py에서 이미지 경로를 설정하고 동작하면, 테스트 이미지를 분류한 카테고리와 정확도를 출력합니다.
+```
+result, pred = pred_return("./image/melanoma.jpg") #ImgPath 설정
+print(result, ':', pred , "%")
+```
 
 ## 4. 결과 
 
