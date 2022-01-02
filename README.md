@@ -145,13 +145,29 @@ Best모델의 정확도, 손실그래프를 통해 성능을 확인합니다.
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
 Flask 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
+<img src="https://user-images.githubusercontent.com/53503626/147868656-d7886e02-54bb-4dc8-a832-5e3a278d6ed0.PNG" width="200" height="200">   
+[Flask 디렉토리 구조 이미지]
 
-[**Flask 디렉토리 구조 이미지**]
 
-model.py는 안드로이드로부터 제공받은 이미지를 AI 모델에 적용하고 분류된 클래스와 정확도를 리턴합니다.      
-[**model.py 코드**] 
+server.py는 Android에서 전송받은 이미지를 from_and 디렉토리에 저장하고,    
+model.py에서 얻은 결과값(ex. "Melanoma 80.2")을 Android로 재전송합니다.   
 
-server.py는 model.py에서 얻은 결과값(String)을 안드로이드로 전송합니다.   
+```Python
+@app.route('/pic', methods=['POST'])
+def pic():
+    # 전송받은 이미지 from_and에 저장
+    if request.method == 'POST':
+        f = request.files['file']
+        filename = secure_filename(f.filename)
+        f.save('C:/Users/User/Desktop/Flask/flask_final/from_and' + filename)
+
+        # 전송받은 이미지 AI모델에 적용 및 분류결과 전송
+	# 전송하는 String 값 : "분류결과 정확도"  , EX. 'melanoma 61.2' 
+	pred = model.pred_return(filename)      
+        ret_pred = pred[0] + ' ' + str(pred[1]) 
+        return ret_pred 	
+```   
+
 [**Flask 서버 동작 콘솔 이미지**]
 
 ---
