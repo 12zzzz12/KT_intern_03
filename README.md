@@ -49,7 +49,10 @@
 - [Flask](https://flask-docs-kr.readthedocs.io/ko/latest/)
 
 ### 데이터 수집   
-[데이터 수집 링크]()    
+* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/train.zip
+* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/valid.zip
+* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/test.zip
+
 <table border=0 >
    <tbody>
        <tr>
