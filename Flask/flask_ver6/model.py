@@ -46,4 +46,4 @@ def pred_return(img) :
     # 분류된 모델 이름, 분류 확률 리턴
     return [result_return, pred_return]
 
-print(pred_return("mel.jpg"))
+print(pred_return("mel.jpeg"))
