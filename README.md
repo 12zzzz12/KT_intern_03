@@ -59,7 +59,7 @@
        <tr>
 			<td align="center"> 1. Melanoma (1346) </td>
 			<td align="center"> 2. Nevus (784) </td>
-			<td align="center"> 3. Seborrheic_keratosis    (793)</td>
+			<td align="center"> 3. Seborrheic_keratosis(793)</td>
 	</tr>
       <tr>
 <td width="33%" >
