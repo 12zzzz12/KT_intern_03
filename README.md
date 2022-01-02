@@ -49,7 +49,7 @@
 - [Flask](https://flask-docs-kr.readthedocs.io/ko/latest/)
 
 ### 데이터 수집   
-* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/train.zi
+* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer
 * https://www.isic-archive.com/#!/onlyHeaderTop/gallery?filter=%5B%22meta.clinical.mel_class%7Cinvasive%20melanoma%22%5D
 * https://derm.cs.sfu.ca/Download.html
 * http://www.cs.rug.nl/~imaging/databases/melanoma_naevi/
