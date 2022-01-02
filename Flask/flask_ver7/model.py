@@ -39,7 +39,7 @@ def pred_return(img) :
     if max(prediction) > 0.5 :
         result_return = categories[prediction.index(max(prediction))]
         pred_return  = float('{:.3f}'.format(max(prediction))) * 100
-    # 최대확률이 0.5 이하이면 안내문구
+    # 최대확률이 0.5 이하이면 안내문구 (3가지 카테고리 중 어느곳에도 속하지 않는 경우)
     else :
         result_return = '다시 찍으세요.'
         pred_return = 0
