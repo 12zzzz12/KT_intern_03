@@ -49,9 +49,10 @@
 - [Flask](https://flask-docs-kr.readthedocs.io/ko/latest/)
 
 ### 데이터 수집   
-* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/train.zip
-* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/valid.zip
-* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/test.zip
+* https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/skin-cancer/train.zi
+* https://www.isic-archive.com/#!/onlyHeaderTop/gallery?filter=%5B%22meta.clinical.mel_class%7Cinvasive%20melanoma%22%5D
+* https://derm.cs.sfu.ca/Download.html
+* http://www.cs.rug.nl/~imaging/databases/melanoma_naevi/
 
 <table border=0 >
    <tbody>
@@ -189,6 +190,7 @@ print(result, ':', pred , "%")
 ---
 ## 5. Reference 
 * 임상헌, and 이명숙. "딥 러닝 기반의 악성흑색종 분류를 위한 컴퓨터 보조진단 알고리즘." 사) 디지털산업정보학회 논문지 14.4 (2018): 69-77.
+* https://github.com/Shubham-SK/dermatologist
 * https://github.com/cavitcakir/Skin-Cancer-Classification
 
 
