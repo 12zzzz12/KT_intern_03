@@ -3,7 +3,7 @@
 # 흑색종 진단 서비스
 
 ## 소개
-**흑색종 진단 서비스**는 흑색종(Melanoma)[**흑색종사이트링크**], 점(Nevus), 검버섯(Seborrheic_keratosis)[**검버섯사이트링크**] 3가지 중 한가지로 판별하는 기능을 수행합니다.   
+**흑색종 진단 서비스**는 [흑색종(Melanoma)](https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32475), 점(Nevus), [검버섯(Seborrheic_keratosis)](https://www.derma.or.kr/new/general/disease.php?uid=5187&mod=document) 3가지 중 한가지로 판별하는 기능을 수행합니다.   
 사용자가 안드로이드 앱을 이용해 흑색종으로 의심되는 피부를 촬영하면, 해당 이미지를 AI 모델이 있는 Flask 서버로 전송합니다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 **0.5 이상의 정확도**를 가지는 카테고리로 분류합니다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 거칩니다. 
 
 **업데이트** : __Jan 01, 2021__ : AndroidImg 
@@ -69,35 +69,78 @@
  
  
 ### 데이터전처리   
-[간단한설명]   
+모델학습을 위해 이미지를 RGB형태의 값을 가진 np배열로 변환하는 작업을 진행합니다.   
 ```Python
-ex) resize.(224,224) ?? 
+for idx, category in enumerate(categories):
+
+    #원-핫 인코딩(One-Hot Encoding)
+    label = [0 for i in range(n_classes)]
+    label[idx] = 1
+    image_dir = data_dir + "/" + category
+    
+    files = glob.glob(image_dir+"/*.jpg") #jpg형태의 이미지를 리스트형태로 반환.
+    print(category, "파일 개수 :", len(files))
+    
+    #각 이미지를 RGB값으로 변환하고 크기도 변환한 후, np배열로 저장.
+    for i, f in enumerate(files):
+        img = Image.open(f)
+        img = img.convert("RGB")
+        img = img.resize((image_w, image_h))
+        data = np.asarray(img)
+
+        X.append(data)
+        y.append(label)
+
+X = np.array(X) #입력 이미지
+y = np.array(y) #label
 ```
 
 ### 학습
    
-**학습코드**   
-[간단한 설명]
+**모델생성 및 학습**   
+본 서비스는 CNN구조를 가진 ResNet50을 사용하여 흑색종, 점, 검버섯을 판별할 수 있도록 하였습니다.
 ```Python   
-ex) train.py 
-   
+base_model = ResNet50(include_top=False, input_shape= (224,224,3), weights = 'imagenet')
+
+x = base_model.output
+
+x = GlobalAveragePooling2D()(x) #extra layers
+x = Dropout(0.35)(x) #overfitting 방지
+
+predictions = Dense(3, activation= 'softmax')(x) #2개이상의 label이므로 softmax.
+
+model = Model(inputs = base_model.input, outputs = predictions)
+
+model.compile(loss = "categorical_crossentropy",
+              optimizer = Adam(lr), 
+              metrics=["accuracy"]) 
 ```
-**파라미터?**   
-[간단한 설명]
 ```Python
-ex) train(parameter)
+history = model.fit(trainx, trainy,
+                    batch_size=batch_size, 
+                    epochs=epoch,
+                    validation_split=0.2,
+                    callbacks=[checkpoint, early_stopping])
+```
+
+**파라미터**   
+모델의 성능향상을 위해서 epoch, batch_size를 조정하여 높은 성능을 가지는 모델을 찾습니다.
+```Python
+input_shape = (224,224,3) #입력 형태 정의(행,열,채널수)
+lr = 1e-5 #학습률
+
+epoch = 10
+batch_size = 16
+validation_split=0.2,
 ```
    
 ### 정확도 측정   
-[간단한 설명]
-```Python
-ex ) model.predict()
-```
-
+Best모델의 정확도, 손실그래프를 통해 성능을 확인합니다.   
+[**정확도, 손실 그래프 이미지**]
 
 ## Flask
-Flask를 이용해 안드로이드와 통신합니다.   
-디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
+AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
+Flask 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
 
 [**Flask 디렉토리 구조 이미지**]
 
@@ -139,7 +182,6 @@ print(result, ':', pred , "%")
 ### 정확도(그래프, 혼동행렬, 등등?)    
 
 
-### 기타논문과 비교   
 
 ---
 ## 5. Reference 
