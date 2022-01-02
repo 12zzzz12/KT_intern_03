@@ -146,7 +146,7 @@ Best모델의 정확도, 손실그래프를 통해 성능을 확인합니다.
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
 Flask 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
 <img src="https://user-images.githubusercontent.com/53503626/147868656-d7886e02-54bb-4dc8-a832-5e3a278d6ed0.PNG" width="200" height="200">   
-[Flask 디렉토리 구조 이미지]
+[Flask 디렉토리 구조]
 
 
 server.py는 Android에서 전송받은 이미지를 from_and 디렉토리에 저장하고,    
