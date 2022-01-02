@@ -3,7 +3,7 @@
 # 흑색종 진단 서비스
 
 ## 소개
-**흑색종 진단 서비스**는 [흑색종(Melanoma)](https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32475), 점(Nevus), [검버섯(Seborrheic_keratosis)](https://www.derma.or.kr/new/general/disease.php?uid=5187&mod=document) 3가지 중 한가지로 판별하는 기능을 수행합니다.   
+**흑색종 진단 서비스**는 [흑색종(Melanoma)](https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32475), 점(Venus), [검버섯(Seborrheic_keratosis)](https://www.derma.or.kr/new/general/disease.php?uid=5187&mod=document) 3가지 중 한가지로 판별하는 기능을 수행합니다.   
 사용자가 안드로이드 앱을 이용해 흑색종으로 의심되는 피부를 촬영하면, 해당 이미지를 AI 모델이 있는 Flask 서버로 전송합니다. Flask에서 전송된 이미지를 AI 모델에 적용하고, 3가지 클래스중 **0.5 이상의 정확도**를 가지는 카테고리로 분류합니다. 분류된 클래스와 정확도를 앱으로 전송해 사용자에게 보여주고, 분류된 클래스가 흑색종일 경우 가까운 병원을 추천하는 과정을 거칩니다. 
 
 **업데이트** : __Jan 01, 2021__ : AndroidImg 
@@ -58,7 +58,7 @@
    <tbody>
        <tr>
 			<td align="center"> 1. Melanoma (1346) </td>
-			<td align="center"> 2. Nevus (784) </td>
+			<td align="center"> 2. Venus (784) </td>
 			<td align="center"> 3. Seborrheic_keratosis    (793)</td>
 	</tr>
       <tr>
