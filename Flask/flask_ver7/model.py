@@ -6,7 +6,7 @@ def pred_return(img) :
 
     categories = ["melanoma", "nevus", "seborrheic_keratosis"]
 
-    # 이미지크기
+    # 이미지크기A
     image_w = 224
     image_h = 224
 
