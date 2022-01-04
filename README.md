@@ -22,23 +22,97 @@
 ## 1. 안드로이드   
 본 서비스를 제공하기 위해서 안드로이드는 이미지 촬영, 병원 추천, AI 모델 통신 기능을 수행합니다.
 
-### UI
+### 이미지 전송
 
 사용자는 안드로이드에서 이미지를 촬영 후, 전송버튼을 눌러 AI 모델로 이미지를 전송합니다.   
+```Java
+@Override
+public void onClick(View v) {
+	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
+	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
+        	@Override
+		public void onResponse(byte[] response) {
+                        Log.d("server", "ai 서버 성공" + response);
+                        String st = new String(response);
+                        if(st.equals("다시 찍으세요. 0")) {
+                            Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
+                        } else {
+			    // 결과값 파싱
+                            parseResult(st);
+                        }
+                        submitToServerButton.setVisibility(View.INVISIBLE);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("AIserver", error.toString());
+                }
+	});
+
+	String imageFileName = saveBitmapToCache(doubleRotated);
+        String imageFilePath = getFilePathFromCache(imageFileName);
+
+        // "file"이라는 이름으로, imageFilePath에 해당하는 사진 upload
+        // volley를 사용하여 통신
+        byteArrayMultiPartRequest.addFile("file", imageFilePath);
+
+        // volley의 requestQueue에 추가
+        VolleySingletonRQ.getInstance(getApplicationContext()).addToRequestQueue(byteArrayMultiPartRequest);
+}
+```
 <img width="50%" src="https://user-images.githubusercontent.com/53503626/147847867-fc66ee04-16d0-40ed-87ff-395da66b0a61.gif"/>   
 [**이미지 선택 후 전송버튼 누르는 녹화**]     
 
 모델에서 얻은 결과를 통해 사용자는 해당 이미지가 흑색종인지 확인할 수 있습니다.     
+```Java
+// 질병명 따라 분기 처리
+// 흑색종 판별 or 설문조사 결과가 흑색종인 경우
+if (diseaseName.equals("melanoma") || diseaseName.equals("returnedMelanoma")) {
+	diseaseText.setText("흑색종 의심!");
+	nearIntent = new Intent(this, melanomaPageActivity.class);
+        infoIntent.setData(Uri.parse("https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32475"));
+} else if (diseaseName.equals("returnedSK")) { // 설문조사 결과가 검버섯인 경우
+	diseaseText.setText("검버섯");
+	nearIntent = new Intent(this, skPageActivity.class);
+        infoIntent.setData(Uri.parse("https://www.derma.or.kr/new/general/disease.php?uid=5187&mod=document"));
+} else {// 점 또는 검버섯인 경우 설문조사 페이지로 이동
+	intent = new Intent(this, skResearchPageActivity.class);
+        intent.putExtra("diseaseName", diseaseName);
+        startActivity(intent);
+}
+```
 [**결과 및 확률이 뜨는 화면 녹화**]   
 
 ### Map 
 Android는 2가지 경우에 사용자에게 Map을 보여줍니다.   
 * 흑색종으로 판별된 경우    
 근처의 **대학병원**을 지도에 표시합니다.   
+```Java
+new NRPlaces.Builder()
+	.listener(melanomaPageActivity.this) // listener로 PlacesListener interface 구현한 activity 넣음
+        .key("AIzaSyBCuGuTxO2Yj7mQcj8Xp_37Hd_3JYF4CWw")
+        .latlng(location.latitude, location.longitude)
+        .radius(5000)
+        .keyword("대학병원")
+        .type(null)
+        .build()
+        .execute();
+```
 [**대학병원 맵 이미지**]
 
 * 검버섯으로 판별된 경우      
 근처의 **피부과**를 지도에 표시합니다.   
+```Java
+new NRPlaces.Builder()
+        .listener(skPageActivity.this) // listener로 PlacesListener interface 구현한 activity 넣음
+        .key("AIzaSyBCuGuTxO2Yj7mQcj8Xp_37Hd_3JYF4CWw")
+        .latlng(location.latitude, location.longitude)
+        .radius(5000)
+        .keyword("피부과")
+        .type(null)
+        .build()
+        .execute();
+```
 [**피부과 맵 이미지**]
 
 
