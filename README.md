@@ -30,14 +30,16 @@
 public void onClick(View v) {
 	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
 	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
-        	@Override
-		public void onResponse(byte[] response) {
+                    @Override
+                    public void onResponse(byte[] response) {
                         Log.d("server", "ai 서버 성공" + response);
                         String st = new String(response);
-                        if(st.equals("다시 찍으세요. 0")) {
+                        String [] splitSt = st.split(" ");
+                        Float probFloat = Float.parseFloat(splitSt[1]);
+                        Log.d("float", splitSt[1]);
+                        if(probFloat == 0) {
                             Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
                         } else {
-			    // 결과값 파싱
                             parseResult(st);
                         }
                         submitToServerButton.setVisibility(View.INVISIBLE);
