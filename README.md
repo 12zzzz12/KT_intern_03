@@ -234,7 +234,7 @@ validation_split=0.2,
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
 Flask 디렉토리에는 분류모델(classificatin_model.h5), 객체모델(detection_model.pb), 분류(pred_classificatin.py), 객체검출(pred_detection.py), 통신(flask.py)을 위한 파일이 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="250" height="250">   
+<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="250" height="250">
 [Flask 디렉토리 구조]
 
 
@@ -256,7 +256,7 @@ def pic():
         ret_pred = pred[0] + ' ' + str(pred[1]) 
         return ret_pred 	
 ```   
-<img src="https://user-images.githubusercontent.com/53503626/148171356-1b471de1-0046-480a-98b3-09fcc65944b5.jpg" width="250" height="250"> 
+<img src="https://user-images.githubusercontent.com/53503626/148171356-1b471de1-0046-480a-98b3-09fcc65944b5.jpg" width="250" height="250">
 [Flask 서버 콘솔 이미지]
 
 ---
