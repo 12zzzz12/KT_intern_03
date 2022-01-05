@@ -22,24 +22,103 @@
 ## 1. 안드로이드   
 본 서비스를 제공하기 위해서 안드로이드는 이미지 촬영, 병원 추천, AI 모델 통신 기능을 수행합니다.
 
-### UI
+### 이미지 전송
 
 사용자는 안드로이드에서 이미지를 촬영 후, 전송버튼을 눌러 AI 모델로 이미지를 전송합니다.   
-<img width="50%" src="https://user-images.githubusercontent.com/53503626/147847867-fc66ee04-16d0-40ed-87ff-395da66b0a61.gif"/>   
-[**이미지 선택 후 전송버튼 누르는 녹화**]     
+```Java
+@Override
+public void onClick(View v) {
+	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
+	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
+        	@Override
+		public void onResponse(byte[] response) {
+                        Log.d("server", "ai 서버 성공" + response);
+                        String st = new String(response);
+                        if(st.equals("다시 찍으세요. 0")) {
+                            Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
+                        } else {
+			    // 결과값 파싱
+                            parseResult(st);
+                        }
+                        submitToServerButton.setVisibility(View.INVISIBLE);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("AIserver", error.toString());
+                }
+	});
 
+	String imageFileName = saveBitmapToCache(doubleRotated);
+        String imageFilePath = getFilePathFromCache(imageFileName);
+
+        // "file"이라는 이름으로, imageFilePath에 해당하는 사진 upload
+        // volley를 사용하여 통신
+        byteArrayMultiPartRequest.addFile("file", imageFilePath);
+
+        // volley의 requestQueue에 추가
+        VolleySingletonRQ.getInstance(getApplicationContext()).addToRequestQueue(byteArrayMultiPartRequest);
+}
+```
+<img width="300" height = "500" src="https://user-images.githubusercontent.com/53503626/148164518-78342356-d806-48c0-a6da-9e15410c40a5.gif"/>   
+[이미지 선택 후 전송버튼 누르는 과정]   
+
+### 결과 확인   
 모델에서 얻은 결과를 통해 사용자는 해당 이미지가 흑색종인지 확인할 수 있습니다.     
-[**결과 및 확률이 뜨는 화면 녹화**]   
+만약 흑색종을 판별된 경우는 질병에 대한 정보, 주변 병원 위치를 사용자에게 알려줍니다.
+```Java
+// 질병명 따라 분기 처리
+// 흑색종 판별 or 설문조사 결과가 흑색종인 경우
+if (diseaseName.equals("melanoma") || diseaseName.equals("returnedMelanoma")) {
+	diseaseText.setText("흑색종 의심!");
+	nearIntent = new Intent(this, melanomaPageActivity.class);
+        infoIntent.setData(Uri.parse("https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32475"));
+} else if (diseaseName.equals("returnedSK")) { // 설문조사 결과가 검버섯인 경우
+	diseaseText.setText("검버섯");
+	nearIntent = new Intent(this, skPageActivity.class);
+        infoIntent.setData(Uri.parse("https://www.derma.or.kr/new/general/disease.php?uid=5187&mod=document"));
+} else {// 점 또는 검버섯인 경우 설문조사 페이지로 이동
+	intent = new Intent(this, skResearchPageActivity.class);
+        intent.putExtra("diseaseName", diseaseName);
+        startActivity(intent);
+}
+```
+<img width="300" height = "500" src="https://user-images.githubusercontent.com/53503626/148165867-9180e493-0289-4a41-a514-b626445dcfa3.gif"/> 
+[결과확인 및 병원 위치표시]   
 
 ### Map 
 Android는 2가지 경우에 사용자에게 Map을 보여줍니다.   
-* 흑색종으로 판별된 경우    
+* 흑색종으로 의심될 경우    
 근처의 **대학병원**을 지도에 표시합니다.   
-[**대학병원 맵 이미지**]
-
-* 검버섯으로 판별된 경우      
-근처의 **피부과**를 지도에 표시합니다.   
-[**피부과 맵 이미지**]
+```Java
+new NRPlaces.Builder()
+	.listener(melanomaPageActivity.this) // listener로 PlacesListener interface 구현한 activity 넣음
+        .key("AIzaSyBCuGuTxO2Yj7mQcj8Xp_37Hd_3JYF4CWw")
+        .latlng(location.latitude, location.longitude)
+        .radius(5000)
+        .keyword("대학병원")
+        .type(null)
+        .build()
+        .execute();
+```
+[대학병원 위치]   
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+        
+* 검버섯으로 의심될 경우   
+ 근처의 **피부과**를 지도에 표시합니다.   
+```Java
+new NRPlaces.Builder()
+        .listener(skPageActivity.this) // listener로 PlacesListener interface 구현한 activity 넣음
+        .key("AIzaSyBCuGuTxO2Yj7mQcj8Xp_37Hd_3JYF4CWw")
+        .latlng(location.latitude, location.longitude)
+        .radius(5000)
+        .keyword("피부과")
+        .type(null)
+        .build()
+        .execute();
+```
+[피부과 위치]   
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
 
 
 ---
@@ -142,19 +221,25 @@ batch_size = 16
 validation_split=0.2,
 ```
    
-### 정확도 측정   
-Best모델의 정확도, 손실그래프를 통해 성능을 확인합니다.   
-[**정확도, 손실 그래프 이미지**]
+### Object_detection   
+
+본 서비스의 AI모델은 분류 모델을 메인으로 합니다.      
+하지만 분류 모델은 흑색종, 점, 검버섯에 대한 이미지로 학습을 진행하였기 때문에, 그 외 분류되지 않는 사진(EX. 사람, 노트북, 커피)에 대한 부분을 보완하기 위해 객체검출 모델을 이용하였습니다. 400여장의 이미지를 학습시킨 객체 검출(Object detection)모델에서 서비스가 원하는 이미지가 맞는지 먼저 판단하고 분류모델 적용을 결정하는 과정을 지닙니다.   
+해당 모델은 오픈API를 이용하여 구축했기 때문에, 자세한 설명은 아래 링크를 첨부합니다.   
+<img src="https://user-images.githubusercontent.com/53503626/148170855-e714c0e0-8afd-4cb2-b8e1-7694a5ef888b.jpg" width="250" height="250">      
+[분류할 객체가 있는지 확인]   
+오픈API : https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
+
 
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
-Flask 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/147868656-d7886e02-54bb-4dc8-a832-5e3a278d6ed0.PNG" width="200" height="200">   
+Flask 디렉토리에는 분류모델(classificatin_model.h5), 객체모델(detection_model.pb), 분류(pred_classificatin.py), 객체검출(pred_detection.py), 통신(flask.py)을 위한 파일이 있습니다.   
+<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="250" height="250">   
 [Flask 디렉토리 구조]
 
 
-server.py는 Android에서 전송받은 이미지를 from_and 디렉토리에 저장하고,    
-model.py에서 얻은 결과값(ex. "Melanoma 80.2")을 Android로 재전송합니다.   
+flask.py는 Android에서 전송받은 이미지를 Flask 디렉토리에 저장하고,    
+Detection(검출)-Classification(분류) 과정을 거쳐서 얻은 결과값(ex. "Melanoma 80.2")을 Android로 재전송합니다.   
 
 ```Python
 @app.route('/pic', methods=['POST'])
@@ -171,8 +256,8 @@ def pic():
         ret_pred = pred[0] + ' ' + str(pred[1]) 
         return ret_pred 	
 ```   
-
-[**Flask 서버 동작 콘솔 이미지**]
+<img src="https://user-images.githubusercontent.com/53503626/148171356-1b471de1-0046-480a-98b3-09fcc65944b5.jpg" width="250" height="250"> 
+[Flask 서버 콘솔 이미지]
 
 ---
 ## 3. AI 모델 실행 방법 
@@ -184,7 +269,7 @@ git clone https://github.com/12zzzz12/KT_intern_03_prototype.git
 ```   
 
 설치한 파일을 PyCharm에서 실행시킵니다.       
-<img src="https://user-images.githubusercontent.com/53503626/147846980-168754cc-4fc9-41ec-a85e-fa4f5a191068.PNG" width="200" height="200"/>    
+<img src="https://user-images.githubusercontent.com/53503626/147846980-168754cc-4fc9-41ec-a85e-fa4f5a191068.PNG" width="200" height="200"/>       
 [디렉토리 이미지]   
     
         
@@ -197,7 +282,7 @@ print(result, ':', pred , "%")
 ```    
 
 코드를 실행하면 AI모델이 흑색종(Melanoma) 이미지를 분류한 것을 확인할 수 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>
+<img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>   
 [흑색종(Melanoma) 이미지 분류결과]   
 
 ---
