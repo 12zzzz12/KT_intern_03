@@ -60,7 +60,7 @@ public void onClick(View v) {
         VolleySingletonRQ.getInstance(getApplicationContext()).addToRequestQueue(byteArrayMultiPartRequest);
 }
 ```
-<img width="50%" height = "500" src="https://user-images.githubusercontent.com/53503626/148164518-78342356-d806-48c0-a6da-9e15410c40a5.gif"/>   
+<img width="300" height = "500" src="https://user-images.githubusercontent.com/53503626/148164518-78342356-d806-48c0-a6da-9e15410c40a5.gif"/>   
 [이미지 선택 후 전송버튼 누르는 과정]   
 
 ### 결과 확인   
@@ -83,7 +83,7 @@ if (diseaseName.equals("melanoma") || diseaseName.equals("returnedMelanoma")) {
         startActivity(intent);
 }
 ```
-<img width="50%" height = "500" src="https://user-images.githubusercontent.com/53503626/148165867-9180e493-0289-4a41-a514-b626445dcfa3.gif"/> 
+<img width="300" height = "500" src="https://user-images.githubusercontent.com/53503626/148165867-9180e493-0289-4a41-a514-b626445dcfa3.gif"/> 
 [결과확인 및 병원 위치표시]   
 
 ### Map 
