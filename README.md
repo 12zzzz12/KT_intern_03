@@ -30,14 +30,16 @@
 public void onClick(View v) {
 	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
 	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
-        	@Override
-		public void onResponse(byte[] response) {
+                    @Override
+                    public void onResponse(byte[] response) {
                         Log.d("server", "ai 서버 성공" + response);
                         String st = new String(response);
-                        if(st.equals("다시 찍으세요. 0")) {
+                        String [] splitSt = st.split(" ");
+                        Float probFloat = Float.parseFloat(splitSt[1]);
+                        Log.d("float", splitSt[1]);
+                        if(probFloat == 0) {
                             Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
                         } else {
-			    // 결과값 파싱
                             parseResult(st);
                         }
                         submitToServerButton.setVisibility(View.INVISIBLE);
@@ -102,7 +104,8 @@ new NRPlaces.Builder()
         .execute();
 ```
 [대학병원 위치]   
-<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">
+
         
 * 검버섯으로 의심될 경우   
  근처의 **피부과**를 지도에 표시합니다.   
@@ -118,7 +121,7 @@ new NRPlaces.Builder()
         .execute();
 ```
 [피부과 위치]   
-<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+<img src="https://user-images.githubusercontent.com/54100538/148168043-697a654e-3a75-4989-a7b7-2c333096cec7.jpg" width="300" height="500">  
 
 
 ---
