@@ -60,9 +60,10 @@ public void onClick(View v) {
         VolleySingletonRQ.getInstance(getApplicationContext()).addToRequestQueue(byteArrayMultiPartRequest);
 }
 ```
-<img width="50%" src="https://user-images.githubusercontent.com/53503626/147847867-fc66ee04-16d0-40ed-87ff-395da66b0a61.gif"/>   
-[**이미지 선택 후 전송버튼 누르는 녹화**]     
+<img width="50%" height = "500" src="https://user-images.githubusercontent.com/53503626/148164518-78342356-d806-48c0-a6da-9e15410c40a5.gif"/>   
+[이미지 선택 후 전송버튼 누르는 과정]   
 
+### 결과 확인   
 모델에서 얻은 결과를 통해 사용자는 해당 이미지가 흑색종인지 확인할 수 있습니다.     
 ```Java
 // 질병명 따라 분기 처리
