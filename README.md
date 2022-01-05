@@ -289,18 +289,16 @@ print(result, ':', pred , "%")
 ---
 ## 4. 결과 
 
-### 정확도(그래프, 혼동행렬, 등등?)    
-
-### 파라미터 조정 
-최적의 모델을 생성하기 위해 Epoch/Batch를 조정하여 학습한 결과, Epoch = 20, Batch = 10 인 모델이 Validation data에 대해 98%의 정확도를 가지는 것을 확인하였습니다.
+#### 파라미터 조정 
+최적의 모델을 생성하기 위해 Epoch/Batch를 조정하여 학습한 결과, Epoch = 15, Batch = 16 인 모델이 Validation data에 대해 93%의 정확도를 가지는 것을 확인하였습니다.
 | Epoch/Batch | 16 | 10 |
 | :---: | :---: | :---: |
 | 10 | 92% | 90% |
-| 15 | 91% | 92% |
-| 20 | **98%** | 91% |
+| 15 | **93%** | 92% |
+| 20 | 90% | 91% |
 
-### 정확도, Loss 그래프
-
+#### 정확도, Loss 그래프
+짧은 시간안에 고성능의 모델을 생성하기 위해서 Dropout과 Batch Nomalization 중, 비교적 정확도가 높은 Batch를 사용하였습니다.
 | Dropout |  Batch Nomalization |
 | :---: |  :---: |
 | <img src="https://user-images.githubusercontent.com/53503626/148176049-53ebec64-a670-4f9d-ab7c-f8e8b78750d7.PNG"> | <img src="https://user-images.githubusercontent.com/53503626/148176048-ff31d87f-0c5b-4713-9e2e-aaf0c8762380.PNG"> |
