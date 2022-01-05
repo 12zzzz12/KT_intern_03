@@ -292,6 +292,40 @@ print(result, ':', pred , "%")
 
 
 
+| Epoch/Batch | 16 | 10 |
+| :--- | :---: | ---: |
+| 10 | 92% | 90% |
+| 15 | 91% | 92% |
+| 20 | 98% | 91% |
+
+<table border=1 >
+   <tbody>
+       <tr>
+			<td align="center">  Epoch/Batch </td>
+			<td align="center">  16 </td>
+			<td align="center">  10 </td>
+	</tr>
+	   <tr>
+	      <td align="center" width="33%" >10</td> 
+	      <td align="center" width="33%" >92%</td>
+	      <td align="center" width="33%">90%</td>
+	   </tr>
+	   <tr>
+		   <td align="center" width="33%" >15</td>
+		   <td align="center" width="33%" >91%</td> 
+	 	<td align="center" width="33%" >92%</td>
+	   </tr>
+	   <tr>
+		   <td align="center" width="33%" >20</td> 
+		   <td align="center" width="33%" > **98%** </td> 
+		   <td align="center" width="33%" >91%</td>
+	   </tr>
+   </tbody>
+ </table>
+ 
+ 
+
+
 ---
 ## 5. Reference 
 * 임상헌, and 이명숙. "딥 러닝 기반의 악성흑색종 분류를 위한 컴퓨터 보조진단 알고리즘." 사) 디지털산업정보학회 논문지 14.4 (2018): 69-77.
