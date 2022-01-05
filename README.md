@@ -119,7 +119,7 @@ new NRPlaces.Builder()
         .execute();
 ```
 [피부과 위치]   
-<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+<img src="https://user-images.githubusercontent.com/53503626/148180622-5d18db2b-d12a-469a-a433-7574d27d8539.jpg" width="300" height="500">  
 
 
 ---
