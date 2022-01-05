@@ -310,6 +310,8 @@ print([result, pred])
 * 임상헌, and 이명숙. "딥 러닝 기반의 악성흑색종 분류를 위한 컴퓨터 보조진단 알고리즘." 사) 디지털산업정보학회 논문지 14.4 (2018): 69-77.
 * https://github.com/Shubham-SK/dermatologist
 * https://github.com/cavitcakir/Skin-Cancer-Classification
+* https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
+* https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/
 
 
 
