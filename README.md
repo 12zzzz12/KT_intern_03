@@ -279,7 +279,7 @@ git clone https://github.com/12zzzz12/KT_intern_03_prototype.git
 model_test.py에서 이미지 경로를 설정하고 동작하면, 테스트 이미지를 분류한 카테고리와 정확도를 출력합니다.
 ```Python
 result, pred = pred_return("./image/melanoma.jpg") #ImgPath 설정
-print(result, ':', pred , "%")
+print([result, pred])
 ```    
 
 코드를 실행하면 AI모델이 세 가지 카테고리로 이미지를 분류한 것을 확인할 수 있습니다.   
