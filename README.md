@@ -8,14 +8,14 @@
 
 **업데이트** : __Jan 01, 2021__ : AndroidImg 
 
-**참여자** : [김륜아](https://github.com/lena-for-world), [김재근](https://github.com/12zzzz12), [김초원](https://github.com/cwaa079), [문지영](https://github.com/94MOONJI), [박인정](https://github.com/injjeong), [안시현](https://github.com/ashnnn98), [우수연](https://github.com/WSY0000), [이채흔](https://github.com/chaeheun), [장지호](https://github.com/twa04047), [천웅빈](https://github.com/woong223)![148175396-a22cf359-e9b3-4b0e-b1f9-4bc3980af39e](https://user-images.githubusercontent.com/53503626/148175656-adfdbf00-8bcf-4d62-8c15-1b4e5f0c9122.png)![148175396-a22cf359-e9b3-4b0e-b1f9-4bc3980af39e]
+**참여자** : [김륜아](https://github.com/lena-for-world), [김재근](https://github.com/12zzzz12), [김초원](https://github.com/cwaa079), [문지영](https://github.com/94MOONJI), [박인정](https://github.com/injjeong), [안시현](https://github.com/ashnnn98), [우수연](https://github.com/WSY0000), [이채흔](https://github.com/chaeheun), [장지호](https://github.com/twa04047), [천웅빈](https://github.com/woong223)!
 
 
 
 ## 목차
 [1. 안드로이드](#안드로이드)   
 [2. AI 모델](#ai-모델)   
-[3. AI 모델 실행 방법](#ai-모델-실행-방법)   ![148175396-a22cf359-e9b3-4b0e-b1f9-4bc3980af39e]
+[3. AI 모델 실행 방법](#ai-모델-실행-방법)  
 [4. 결과](#결과)   
 [5. 참고자료](#Reference)   
    
