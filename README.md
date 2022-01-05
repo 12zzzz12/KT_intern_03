@@ -263,7 +263,7 @@ git clone https://github.com/12zzzz12/KT_intern_03_prototype.git
 ```   
 
 설치한 파일을 PyCharm에서 실행시킵니다.       
-<img src="https://user-images.githubusercontent.com/53503626/147846980-168754cc-4fc9-41ec-a85e-fa4f5a191068.PNG" width="200" height="200"/>    
+<img src="https://user-images.githubusercontent.com/53503626/147846980-168754cc-4fc9-41ec-a85e-fa4f5a191068.PNG" width="200" height="200"/>       
 [디렉토리 이미지]   
     
         
@@ -276,7 +276,7 @@ print(result, ':', pred , "%")
 ```    
 
 코드를 실행하면 AI모델이 흑색종(Melanoma) 이미지를 분류한 것을 확인할 수 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>
+<img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>   
 [흑색종(Melanoma) 이미지 분류결과]   
 
 ---
