@@ -226,13 +226,15 @@ validation_split=0.2,
 본 서비스의 AI모델은 분류 모델을 메인으로 합니다.      
 하지만 분류 모델은 흑색종, 점, 검버섯에 대한 이미지로 학습을 진행하였기 때문에, 그 외 분류되지 않는 사진(EX. 사람, 노트북, 커피)에 대한 부분을 보완하기 위해 객체검출 모델을 이용하였습니다. 400여장의 이미지를 학습시킨 객체 검출(Object detection)모델에서 서비스가 원하는 이미지가 맞는지 먼저 판단하고 분류모델 적용을 결정하는 과정을 지닙니다.   
 해당 모델은 오픈API를 이용하여 구축했기 때문에, 자세한 설명은 아래 링크를 첨부합니다.   
+<img src="https://user-images.githubusercontent.com/53503626/148170855-e714c0e0-8afd-4cb2-b8e1-7694a5ef888b.jpg" width="250" height="250">      
+[분류할 객체가 있는지 확인]   
 오픈API : https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
 
 
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
 Flask 디렉토리에는 분류모델(classificatin_model.h5), 객체모델(detection_model.pb), 분류(pred_classificatin.py), 객체검출(pred_detection.py), 통신(flask.py)을 위한 파일이 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="200" height="200">   
+<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="250" height="250">   
 [Flask 디렉토리 구조]
 
 
@@ -254,8 +256,8 @@ def pic():
         ret_pred = pred[0] + ' ' + str(pred[1]) 
         return ret_pred 	
 ```   
-
-[**Flask 서버 동작 콘솔 이미지**]
+<img src="https://user-images.githubusercontent.com/53503626/148171356-1b471de1-0046-480a-98b3-09fcc65944b5.jpg" width="250" height="250"> 
+[Flask 서버 콘솔 이미지]
 
 ---
 ## 3. AI 모델 실행 방법 
