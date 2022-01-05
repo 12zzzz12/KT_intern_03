@@ -30,16 +30,14 @@
 public void onClick(View v) {
 	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
 	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
-                    @Override
-                    public void onResponse(byte[] response) {
+        	@Override
+		public void onResponse(byte[] response) {
                         Log.d("server", "ai 서버 성공" + response);
                         String st = new String(response);
-                        String [] splitSt = st.split(" ");
-                        Float probFloat = Float.parseFloat(splitSt[1]);
-                        Log.d("float", splitSt[1]);
-                        if(probFloat == 0) {
+                        if(st.equals("다시 찍으세요. 0")) {
                             Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
                         } else {
+			    // 결과값 파싱
                             parseResult(st);
                         }
                         submitToServerButton.setVisibility(View.INVISIBLE);
@@ -67,6 +65,7 @@ public void onClick(View v) {
 
 ### 결과 확인   
 모델에서 얻은 결과를 통해 사용자는 해당 이미지가 흑색종인지 확인할 수 있습니다.     
+만약 흑색종을 판별된 경우는 질병에 대한 정보, 주변 병원 위치를 사용자에게 알려줍니다.
 ```Java
 // 질병명 따라 분기 처리
 // 흑색종 판별 or 설문조사 결과가 흑색종인 경우
@@ -84,7 +83,8 @@ if (diseaseName.equals("melanoma") || diseaseName.equals("returnedMelanoma")) {
         startActivity(intent);
 }
 ```
-[**결과 및 확률이 뜨는 화면 녹화**]   
+<img width="50%" height = "500" src="https://user-images.githubusercontent.com/53503626/148165867-9180e493-0289-4a41-a514-b626445dcfa3.gif"/> 
+[결과확인 및 병원 위치표시]   
 
 ### Map 
 Android는 2가지 경우에 사용자에게 Map을 보여줍니다.   
