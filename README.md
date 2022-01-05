@@ -88,7 +88,7 @@ if (diseaseName.equals("melanoma") || diseaseName.equals("returnedMelanoma")) {
 
 ### Map 
 Android는 2가지 경우에 사용자에게 Map을 보여줍니다.   
-* 흑색종으로 판별된 경우    
+* 흑색종으로 의심될 경우    
 근처의 **대학병원**을 지도에 표시합니다.   
 ```Java
 new NRPlaces.Builder()
@@ -104,7 +104,7 @@ new NRPlaces.Builder()
 [대학병원 위치]   
 <img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
         
-* 검버섯으로 판별된 경우   
+* 검버섯으로 의심될 경우   
  근처의 **피부과**를 지도에 표시합니다.   
 ```Java
 new NRPlaces.Builder()
