@@ -282,9 +282,10 @@ result, pred = pred_return("./image/melanoma.jpg") #ImgPath 설정
 print(result, ':', pred , "%")
 ```    
 
-코드를 실행하면 AI모델이 흑색종(Melanoma) 이미지를 분류한 것을 확인할 수 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/147847200-0132a34f-2bf0-4e8f-8ad3-0fa974abcb8b.PNG" width="700" height="200"/>   
-[흑색종(Melanoma) 이미지 분류결과]   
+코드를 실행하면 AI모델이 세 가지 카테고리로 이미지를 분류한 것을 확인할 수 있습니다.   
+
+|<img src="https://user-images.githubusercontent.com/53503626/148182756-19bba4c3-2401-4a40-9316-891e54d79c17.PNG" width="200" height="200"/> | <img src="https://user-images.githubusercontent.com/53503626/148182538-7533beae-0bb4-4741-8170-0bb4375a4fef.PNG" width="200" height="200"/> | <img src="https://user-images.githubusercontent.com/53503626/148182540-ce96b506-413a-4362-b735-7f77a7c17fc5.PNG" width="200" height="200"/> | 
+[이미지 분류결과]   
 
 ---
 ## 4. 결과 
