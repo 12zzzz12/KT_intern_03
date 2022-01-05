@@ -231,7 +231,7 @@ validation_split=0.2,
 
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
-Flask 디렉토리에는 모델(Checkpoint.h5), 모델적용(Model.py), 안드로이드통신(Server.py)을 위한 코드가 있습니다.   
+Flask 디렉토리에는 분류모델(classificatin_model.h5), 객체모델(detection_model.pb), 분류(pred_classificatin.py), 객체검출(pred_detection.py), 통신(flask.py)을 위한 파일이 있습니다.   
 <img src="https://user-images.githubusercontent.com/53503626/147868656-d7886e02-54bb-4dc8-a832-5e3a278d6ed0.PNG" width="200" height="200">   
 [Flask 디렉토리 구조]
 
