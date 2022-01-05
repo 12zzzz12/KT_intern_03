@@ -30,16 +30,14 @@
 public void onClick(View v) {
 	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
 	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
-                    @Override
-                    public void onResponse(byte[] response) {
+        	@Override
+		public void onResponse(byte[] response) {
                         Log.d("server", "ai 서버 성공" + response);
                         String st = new String(response);
-                        String [] splitSt = st.split(" ");
-                        Float probFloat = Float.parseFloat(splitSt[1]);
-                        Log.d("float", splitSt[1]);
-                        if(probFloat == 0) {
+                        if(st.equals("다시 찍으세요. 0")) {
                             Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
                         } else {
+			    // 결과값 파싱
                             parseResult(st);
                         }
                         submitToServerButton.setVisibility(View.INVISIBLE);
@@ -104,8 +102,7 @@ new NRPlaces.Builder()
         .execute();
 ```
 [대학병원 위치]   
-<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">
-
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
         
 * 검버섯으로 의심될 경우   
  근처의 **피부과**를 지도에 표시합니다.   
@@ -121,7 +118,7 @@ new NRPlaces.Builder()
         .execute();
 ```
 [피부과 위치]   
-<img src="https://user-images.githubusercontent.com/54100538/148168043-697a654e-3a75-4989-a7b7-2c333096cec7.jpg" width="300" height="500">  
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
 
 
 ---
@@ -224,9 +221,14 @@ batch_size = 16
 validation_split=0.2,
 ```
    
-### 정확도 측정   
-Best모델의 정확도, 손실그래프를 통해 성능을 확인합니다.   
-[**정확도, 손실 그래프 이미지**]
+### Object_detection   
+
+본 서비스의 AI모델은 분류 모델을 메인으로 합니다.      
+하지만 분류 모델은 흑색종, 점, 검버섯에 대한 이미지로 학습을 진행하였기 때문에, 그 외 분류되지 않는 사진(EX. 사람, 노트북, 커피)에 대한 부분을 보완하기 위해 객체검출 모델을 이용하였습니다.      
+400여장의 이미지를 학습시킨 객체 검출(Object detection)모델에서 서비스가 원하는 이미지가 맞는지 먼저 판단하고 분류모델 적용을 결정하는 과정을 지닙니다.   
+해당 모델은 오픈API를 이용하여 구축했기 때문에, 자세한 설명은 아래 링크를 첨부합니다.   
+오픈API : https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
+
 
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
