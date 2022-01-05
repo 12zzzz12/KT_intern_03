@@ -101,7 +101,8 @@ new NRPlaces.Builder()
         .build()
         .execute();
 ```
-[**대학병원 맵 이미지**]
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+[대학병원 위치]
 
 * 검버섯으로 판별된 경우      
 근처의 **피부과**를 지도에 표시합니다.   
@@ -116,7 +117,8 @@ new NRPlaces.Builder()
         .build()
         .execute();
 ```
-[**피부과 맵 이미지**]
+<img src="https://user-images.githubusercontent.com/53503626/148166372-41f30120-a138-48c7-b5e4-04989f487d50.PNG" width="300" height="500">  
+[피부과 위치]
 
 
 ---
