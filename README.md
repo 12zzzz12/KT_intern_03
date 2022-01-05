@@ -232,12 +232,12 @@ validation_split=0.2,
 ## Flask
 AI 모델은 Flask를 이용해 안드로이드와 통신합니다.   
 Flask 디렉토리에는 분류모델(classificatin_model.h5), 객체모델(detection_model.pb), 분류(pred_classificatin.py), 객체검출(pred_detection.py), 통신(flask.py)을 위한 파일이 있습니다.   
-<img src="https://user-images.githubusercontent.com/53503626/147868656-d7886e02-54bb-4dc8-a832-5e3a278d6ed0.PNG" width="200" height="200">   
+<img src="https://user-images.githubusercontent.com/53503626/148169968-4318c3da-f86d-4faf-812c-639a8ee6809d.PNG" width="200" height="200">   
 [Flask 디렉토리 구조]
 
 
-server.py는 Android에서 전송받은 이미지를 from_and 디렉토리에 저장하고,    
-model.py에서 얻은 결과값(ex. "Melanoma 80.2")을 Android로 재전송합니다.   
+flask.py는 Android에서 전송받은 이미지를 Flask 디렉토리에 저장하고,    
+Detection(검출)-Classification(분류) 과정을 거쳐서 얻은 결과값(ex. "Melanoma 80.2")을 Android로 재전송합니다.   
 
 ```Python
 @app.route('/pic', methods=['POST'])
