@@ -29,40 +29,68 @@
 ```Java
 @Override
 public void onClick(View v) {
+	Log.d("server", "서버 제출 버튼");
+	// onResponse로 Response.Listener 객체 생성
 	// flask [post] /pic api로 사진 전송 (Volley MultipartRequest 이용)
 	ByteArrayMultiPartRequest byteArrayMultiPartRequest = new ByteArrayMultiPartRequest(Request.Method.POST, AiServerUrl, new Response.Listener<byte[]>() {
         	@Override
-		public void onResponse(byte[] response) {
-                        Log.d("server", "ai 서버 성공" + response);
+                public void onResponse(byte[] response) {
+                	Log.d("server", "ai 서버 성공" + response);
                         String st = new String(response);
-                        if(st.equals("다시 찍으세요. 0")) {
-                            Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
+                        String [] splitSt = st.split(" ");
+                        Float probFloat = Float.parseFloat(splitSt[1]);
+                        if(probFloat == 0) {
+                        	Toast.makeText(getApplicationContext(), "이미지가 정확하지 않아요! 사진을 다시 찍어주세요", Toast.LENGTH_LONG).show();
                         } else {
-			    // 결과값 파싱
-                            parseResult(st);
+				parseResult(st);
                         }
                         submitToServerButton.setVisibility(View.INVISIBLE);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("AIserver", error.toString());
-                }
+		}
+	}, new Response.ErrorListener() {
+        	@Override
+                public void onErrorResponse(VolleyError error) {
+                	Log.d("AIserver", error.toString());
+		}
 	});
-
-	String imageFileName = saveBitmapToCache(doubleRotated);
+        String imageFileName = saveBitmapToCache(doubleRotated);
         String imageFilePath = getFilePathFromCache(imageFileName);
-
-        // "file"이라는 이름으로, imageFilePath에 해당하는 사진 upload
-        // volley를 사용하여 통신
+	// "file"이라는 이름으로, imageFilePath에 해당하는 사진을 String형식으로 upload 요청을 저장
+        // 이 때 통신을 위해서 volley를 사용
         byteArrayMultiPartRequest.addFile("file", imageFilePath);
-
-        // volley의 requestQueue에 추가
+	// volley의 requestQueue에 저장
         VolleySingletonRQ.getInstance(getApplicationContext()).addToRequestQueue(byteArrayMultiPartRequest);
 }
 ```
 <img width="300" height = "500" src="https://user-images.githubusercontent.com/53503626/148164518-78342356-d806-48c0-a6da-9e15410c40a5.gif"/>   
 [이미지 선택 후 전송버튼 누르는 과정]   
+
+### 설문조사
+점 또는 검버섯으로 검출되었으나 출혈 및 통증과 같은 자각 증상이 있을 시,
+흑색종으로 의심될 우려가 있으므로 추가 설문 진행 후 가까운 대학병원으로 정밀 진단을 추천합니다.
+```Java
+// 설문 결과 전송
+resultBut.setOnClickListener(new View.OnClickListener() {
+	@Override
+        public void onClick(View view) {
+        	Intent intent = getIntent();
+                String diseaseName = intent.getStringExtra("diseaseName");
+                result = checkFlag(flag1, flag2);
+                // 예, 예 -> 흑색종 의심
+                if(result == 1) {
+                	intent = new Intent(getApplicationContext(), diseaseInfoPageActivity.class);
+                	intent.putExtra("diseaseName", "returnedMelanoma");
+                } else { // 그 외 조합 -> 설문조사 이전 검출되었던 결과 출력
+ 	               if(diseaseName.equals("nevus")) {
+        	        	intent = new Intent(getApplicationContext(), nevusPageActivity.class);
+                	} else {
+                        	intent = new Intent(getApplicationContext(), diseaseInfoPageActivity.class);
+                        	intent.putExtra("diseaseName", "returnedSK");
+                	}
+		}
+        	startActivity(intent);
+	}
+});
+```
 
 ### 결과 확인   
 모델에서 얻은 결과를 통해 사용자는 해당 이미지가 흑색종인지 확인할 수 있습니다.     
